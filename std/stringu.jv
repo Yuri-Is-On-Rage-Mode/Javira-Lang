@@ -1,0 +1,88 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static String concat(String str1, String str2){return str1.concat(str2);}\n")
+    (asm "public static String toLowerCase(String str){return str.toLowerCase();}\n")
+    (asm "public static String toUpperCase(String str){return str.toUpperCase();}\n")
+    (asm "public static boolean equalsIgnoreCase(String str1, String str2){return str1.equalsIgnoreCase(str2);}\n")
+    (asm "public static int length(String str){return str.length();}\n")
+    (asm "public static char charAt(String str, int index){return str.charAt(index);}\n")
+    (asm "public static int indexOf(String str, String substr){return str.indexOf(substr);}\n")
+    (asm "public static int lastIndexOf(String str, String substr){return str.lastIndexOf(substr);}\n")
+    (asm "public static boolean startsWith(String str, String prefix){return str.startsWith(prefix);}\n")
+    (asm "public static boolean endsWith(String str, String suffix){return str.endsWith(suffix);}\n")
+    (asm "public static String replace(String str, String target, String replacement){return str.replace(target, replacement);}\n")
+    (asm "public static String replaceAll(String str, String regex, String replacement){return str.replaceAll(regex, replacement);}\n")
+    (asm "public static String[] split(String str, String regex){return str.split(regex);}\n")
+    (asm "public static String trim(String str){return str.trim();}\n")
+    (asm "public static boolean isEmpty(String str){return str.isEmpty();}\n")
+    (asm "public static String join(String delimiter, String... elements){return String.join(delimiter, elements);}\n")
+    (asm "public static String substring(String str, int beginIndex){return str.substring(beginIndex);}\n")
+    (asm "public static String substring(String str, int beginIndex, int endIndex){return str.substring(beginIndex, endIndex);}\n")
+    (asm "public static String[] splitByWhitespace(String str){return str.split(\"\\s+\");}\n")
+    (asm "public static boolean matches(String str, String regex){return str.matches(regex);}\n")
+    (asm "public static String replaceFirst(String str, String regex, String replacement){return str.replaceFirst(regex, replacement);}\n")
+    (asm "public static boolean contains(String str, CharSequence s){return str.contains(s);}\n")
+    (asm "public static boolean isBlank(String str){return str.isBlank();}\n")
+    (asm "public static String strip(String str){return str.strip();}\n")
+    (asm "public static String stripLeading(String str){return str.stripLeading();}\n")
+    (asm "public static String stripTrailing(String str){return str.stripTrailing();}\n")
+    (asm "public static boolean contentEquals(String str, CharSequence cs){return str.contentEquals(cs);}\n")
+    (asm "public static String format(String format, Object... args){return String.format(format, args);}\n")
+    (asm "public static String joinWith(String delimiter, CharSequence... elements){return String.join(delimiter, elements);}\n")
+    (asm "public static String repeat(String str, int count){return str.repeat(count);}\n")
+    (asm "public static String valueOf(Object obj){return String.valueOf(obj);}\n")
+    (asm "public static int compareTo(String str1, String str2){return str1.compareTo(str2);}\n")
+    (asm "public static boolean isNumeric(String str){return str.matches(\"\\d+\");}\n")
+    (asm "public static boolean isAlpha(String str){return str.matches(\"[a-zA-Z]+\");}\n")
+    (asm "public static boolean isAlphanumeric(String str){return str.matches(\"[a-zA-Z0-9]+\");}\n")
+    (asm "public static String reverse(String str){return new StringBuilder(str).reverse().toString();}\n")
+    (asm "public static String toTitleCase(String str){\n"
+         "return Arrays.stream(str.split(\" \")).map(w -> w.substring(0, 1).toUpperCase() + w.substring(1).toLowerCase()).collect(Collectors.joining(\" \"));\n"
+         "}\n")
+    (asm "public static String[] splitLines(String str){return str.split(\"\\r?\\n\");}\n")
+    (asm "public static String capitalize(String str){\n"
+         "return str == null || str.isEmpty() ? str : str.substring(0, 1).toUpperCase() + str.substring(1);\n"
+         "}\n")
+    (asm "public static boolean isUpperCase(String str){return str.equals(str.toUpperCase());}\n")
+    (asm "public static boolean isLowerCase(String str){return str.equals(str.toLowerCase());}\n")
+    (asm "public static String padStart(String str, int minLength, char padChar){\n"
+         "return String.format(\"%\" + minLength + \"s\", str).replace(' ', padChar);\n"
+         "}\n")
+    (asm "public static String padEnd(String str, int minLength, char padChar){\n"
+         "return String.format(\"%-\" + minLength + \"s\", str).replace(' ', padChar);\n"
+         "}\n")
+    (asm "public static String escapeHtml(String str){\n"
+         "return str.replace(\"&\", \"&amp;\").replace(\"<\", \"&lt;\").replace(\">\", \"&gt;\").replace(\"\\\"\", \"&quot;\").replace(\"'\", \"&apos;\");\n"
+         "}\n")
+    (asm "public static String unescapeHtml(String str){\n"
+         "return str.replace(\"&lt;\", \"<\").replace(\"&gt;\", \">\").replace(\"&quot;\", \"\\\"\").replace(\"&apos;\", \"'\").replace(\"&amp;\", \"&\");\n"
+         "}\n")
+    (asm "public static String escapeJava(String str){return StringEscapeUtils.escapeJava(str);}\n")
+    (asm "public static String unescapeJava(String str){return StringEscapeUtils.unescapeJava(str);}\n")
+    (asm "public static String escapeJson(String str){return StringEscapeUtils.escapeJson(str);}\n")
+    (asm "public static String unescapeJson(String str){return StringEscapeUtils.unescapeJson(str);}\n")
+    (asm "public static String escapeXml(String str){return StringEscapeUtils.escapeXml10(str);}\n")
+    (asm "public static String unescapeXml(String str){return StringEscapeUtils.unescapeXml(str);}\n")
+    (asm "public static String escapeCsv(String str){return StringEscapeUtils.escapeCsv(str);}\n")
+    (asm "public static String unescapeCsv(String str){return StringEscapeUtils.unescapeCsv(str);}\n")
+    (asm "public static String removeWhitespace(String str){return str.replaceAll(\"\\s\", \"\");}\n")
+    (asm "public static String abbreviate(String str, int maxWidth){return StringUtils.abbreviate(str, maxWidth);}\n")
+    (asm "public static String center(String str, int size){return StringUtils.center(str, size);}\n")
+    (asm "public static String leftPad(String str, int size){return StringUtils.leftPad(str, size);}\n")
+    (asm "public static String rightPad(String str, int size){return StringUtils.rightPad(str, size);}\n")
+    (asm "public static String wrap(String str, int wrapLength){return WordUtils.wrap(str, wrapLength);}\n")
+    (asm "public static String capitalizeFully(String str){return WordUtils.capitalizeFully(str);}\n")
+    (asm "public static String swapCase(String str){return WordUtils.swapCase(str);}\n")
+    (asm "public static String initials(String str){return WordUtils.initials(str);}\n")
+    (asm "public static String removeStart(String str, String remove){return StringUtils.removeStart(str, remove);}\n")
+    (asm "public static String removeEnd(String str, String remove){return StringUtils.removeEnd(str, remove);}\n")
+    (asm "public static String remove(String str, String remove){return StringUtils.remove(str, remove);}\n")
+    (asm "public static String removeStartIgnoreCase(String str, String remove){return StringUtils.removeStartIgnoreCase(str, remove);}\n")
+    (asm "public static String removeEndIgnoreCase(String str, String remove){return StringUtils.removeEndIgnoreCase(str, remove);}\n")
+    (asm "public static String removeIgnoreCase(String str, String remove){return StringUtils.removeIgnoreCase(str, remove);}\n")
+    (asm "public static String replaceEach(String str, String[] searchList, String[] replacementList){return StringUtils.replaceEach(str, searchList, replacementList);}\n")
+    (asm "public static String replaceEachRepeatedly(String str, String[] searchList, String[] replacementList){return StringUtils.replaceEachRepeatedly(str, searchList, replacementList);}\n")
+)
+
+

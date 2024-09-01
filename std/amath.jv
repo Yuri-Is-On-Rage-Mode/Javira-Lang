@@ -1,0 +1,84 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static double[][] matrixMultiply(double[][] A, double[][] B){\n"
+         "int rowsA = A.length, colsA = A[0].length, colsB = B[0].length;\n"
+         "double[][] C = new double[rowsA][colsB];\n"
+         "for(int i = 0; i < rowsA; i++){\n"
+         "    for(int j = 0; j < colsB; j++){\n"
+         "        for(int k = 0; k < colsA; k++){\n"
+         "            C[i][j] += A[i][k] * B[k][j];\n"
+         "        }\n"
+         "    }\n"
+         "}\n"
+         "return C;\n"
+         "}\n")
+
+    (asm "public static double[] solveLinearSystem(double[][] A, double[] b){\n"
+         "int n = b.length;\n"
+         "for(int p = 0; p < n; p++){\n"
+         "    int max = p;\n"
+         "    for(int i = p + 1; i < n; i++){\n"
+         "        if(Math.abs(A[i][p]) > Math.abs(A[max][p])){\n"
+         "            max = i;\n"
+         "        }\n"
+         "    }\n"
+         "    double[] temp = A[p]; A[p] = A[max]; A[max] = temp;\n"
+         "    double t = b[p]; b[p] = b[max]; b[max] = t;\n"
+         "    for(int i = p + 1; i < n; i++){\n"
+         "        double alpha = A[i][p] / A[p][p];\n"
+         "        b[i] -= alpha * b[p];\n"
+         "        for(int j = p; j < n; j++){\n"
+         "            A[i][j] -= alpha * A[p][j];\n"
+         "        }\n"
+         "    }\n"
+         "}\n"
+         "double[] x = new double[n];\n"
+         "for(int i = n - 1; i >= 0; i--){\n"
+         "    double sum = 0.0;\n"
+         "    for(int j = i + 1; j < n; j++){\n"
+         "        sum += A[i][j] * x[j];\n"
+         "    }\n"
+         "    x[i] = (b[i] - sum) / A[i][j];\n"
+         "}\n"
+         "return x;\n"
+         "}\n")
+
+    (asm "public static double integrate(Function<Double, Double> f, double a, double b, int n){\n"
+         "double h = (b - a) / n;\n"
+         "double sum = 0.5 * (f.apply(a) + f.apply(b));\n"
+         "for(int i = 1; i < n; i++){\n"
+         "    sum += f.apply(a + i * h);\n"
+         "}\n"
+         "return sum * h;\n"
+         "}\n")
+
+    (asm "public static double differentiate(Function<Double, Double> f, double x, double h){\n"
+         "return (f.apply(x + h) - f.apply(x - h)) / (2 * h);\n"
+         "}\n")
+
+    (asm "public static double[] polynomialRoots(double[] coefficients){\n"
+         "int n = coefficients.length - 1;\n"
+         "Complex[] roots = new Complex[n];\n"
+         "// Implementation for finding polynomial roots (using numerical methods like Newton's or Durand-Kerner)\n"
+         "// This would be a placeholder or more detailed implementation as needed.\n"
+         "return new double[n]; // Placeholder return\n"
+         "}\n")
+
+    (asm "public static double standardDeviation(double[] data){\n"
+         "double mean = Arrays.stream(data).average().orElse(0.0);\n"
+         "double variance = Arrays.stream(data).map(x -> Math.pow(x - mean, 2)).sum() / data.length;\n"
+         "return Math.sqrt(variance);\n"
+         "}\n")
+
+    (asm "public static double[][] transpose(double[][] matrix){\n"
+         "int rows = matrix.length, cols = matrix[0].length;\n"
+         "double[][] transposed = new double[cols][rows];\n"
+         "for(int i = 0; i < rows; i++){\n"
+         "    for(int j = 0; j < cols; j++){\n"
+         "        transposed[j][i] = matrix[i][j];\n"
+         "    }\n"
+         "}\n"
+         "return transposed;\n"
+         "}\n")
+)

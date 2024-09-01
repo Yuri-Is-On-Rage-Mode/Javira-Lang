@@ -48,7 +48,7 @@ Javira is a teeny-tiny programming language born from the mind of a caffeinated 
 PS G:\> ls
 
 
-    Directory: G:\fri3nds\w-category-projects\P#\wax-main\Release
+    Directory: G:\
 
 
 Mode                 LastWriteTime         Length Name
@@ -84,7 +84,6 @@ PS G:\Dev\javira\src> javira --run ../examples/helloworld.jv
 @info running Java code...
 hello world!
 @info cleaning up...
-PS G:\fri3nds\w-category-projects\P#\wax-main\Release> 
 ```
 
 # Features
@@ -101,7 +100,7 @@ PS G:\fri3nds\w-category-projects\P#\wax-main\Release>
 > Borrowed from another whimsical programming language! 🌟
 
 ```lisp
-;; raycast.wax
+;; raycast.jv
 ;; bare-minimum raycaster demo
 ;;
 ;; - ray-triangle intersection

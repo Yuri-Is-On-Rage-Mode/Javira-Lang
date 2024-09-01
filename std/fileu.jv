@@ -1,0 +1,107 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static String readFile(String filePath) throws IOException {\n"
+         "return Files.readString(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static void writeFile(String filePath, String content) throws IOException {\n"
+         "Files.writeString(Paths.get(filePath), content);\n"
+         "}\n")
+
+    (asm "public static List<String> readLines(String filePath) throws IOException {\n"
+         "return Files.readAllLines(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static void writeLines(String filePath, List<String> lines) throws IOException {\n"
+         "Files.write(Paths.get(filePath), lines);\n"
+         "}\n")
+
+    (asm "public static boolean deleteFile(String filePath) throws IOException {\n"
+         "return Files.deleteIfExists(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static boolean copyFile(String sourcePath, String destPath) throws IOException {\n"
+         "Files.copy(Paths.get(sourcePath), Paths.get(destPath), StandardCopyOption.REPLACE_EXISTING);\n"
+         "return true;\n"
+         "}\n")
+
+    (asm "public static boolean moveFile(String sourcePath, String destPath) throws IOException {\n"
+         "Files.move(Paths.get(sourcePath), Paths.get(destPath), StandardCopyOption.REPLACE_EXISTING);\n"
+         "return true;\n"
+         "}\n")
+
+    (asm "public static boolean fileExists(String filePath) {\n"
+         "return Files.exists(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static long getFileSize(String filePath) throws IOException {\n"
+         "return Files.size(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static String getFileExtension(String filePath) {\n"
+         "int index = filePath.lastIndexOf('.');\n"
+         "return (index > 0) ? filePath.substring(index + 1) : \"\";\n"
+         "}\n")
+
+    (asm "public static void createDirectory(String dirPath) throws IOException {\n"
+         "Files.createDirectories(Paths.get(dirPath));\n"
+         "}\n")
+
+    (asm "public static List<String> listFiles(String dirPath) throws IOException {\n"
+         "try (Stream<Path> stream = Files.list(Paths.get(dirPath))) {\n"
+         "    return stream.map(Path::toString).collect(Collectors.toList());\n"
+         "}\n"
+         "}\n")
+
+    (asm "public static String getFileName(String filePath) {\n"
+         "return Paths.get(filePath).getFileName().toString();\n"
+         "}\n")
+
+    (asm "public static String getFileNameWithoutExtension(String filePath) {\n"
+         "String fileName = getFileName(filePath);\n"
+         "int index = fileName.lastIndexOf('.');\n"
+         "return (index > 0) ? fileName.substring(0, index) : fileName;\n"
+         "}\n")
+
+    (asm "public static byte[] readBinaryFile(String filePath) throws IOException {\n"
+         "return Files.readAllBytes(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static void writeBinaryFile(String filePath, byte[] content) throws IOException {\n"
+         "Files.write(Paths.get(filePath), content);\n"
+         "}\n")
+
+    (asm "public static void appendToFile(String filePath, String content) throws IOException {\n"
+         "Files.write(Paths.get(filePath), content.getBytes(), StandardOpenOption.APPEND);\n"
+         "}\n")
+
+    (asm "public static String getMimeType(String filePath) throws IOException {\n"
+         "return Files.probeContentType(Paths.get(filePath));\n"
+         "}\n")
+
+    (asm "public static String readFirstLine(String filePath) throws IOException {\n"
+         "try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {\n"
+         "    return reader.readLine();\n"
+         "}\n"
+         "}\n")
+
+    (asm "public static String readLastLine(String filePath) throws IOException {\n"
+         "try (ReversedLinesFileReader reader = new ReversedLinesFileReader(new File(filePath))) {\n"
+         "    return reader.readLine();\n"
+         "}\n"
+         "}\n")
+
+    (asm "public static List<String> searchFile(String filePath, String keyword) throws IOException {\n"
+         "return Files.lines(Paths.get(filePath))\n"
+         "    .filter(line -> line.contains(keyword))\n"
+         "    .collect(Collectors.toList());\n"
+         "}\n")
+
+    (asm "public static String replaceInFile(String filePath, String target, String replacement) throws IOException {\n"
+         "String content = readFile(filePath);\n"
+         "content = content.replace(target, replacement);\n"
+         "writeFile(filePath, content);\n"
+         "return content;\n"
+         "}\n")
+)

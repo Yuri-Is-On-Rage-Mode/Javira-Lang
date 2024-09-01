@@ -1,0 +1,80 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static BufferedImage createImage(int width, int height){\n"
+         "return new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);\n"
+         "}\n")
+
+    (asm "public static void drawLine(BufferedImage img, int x1, int y1, int x2, int y2, Color color){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setColor(color);\n"
+         "g.drawLine(x1, y1, x2, y2);\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void drawRectangle(BufferedImage img, int x, int y, int width, int height, Color color, boolean filled){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setColor(color);\n"
+         "if(filled){\n"
+         "    g.fillRect(x, y, width, height);\n"
+         "} else {\n"
+         "    g.drawRect(x, y, width, height);\n"
+         "}\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void drawOval(BufferedImage img, int x, int y, int width, int height, Color color, boolean filled){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setColor(color);\n"
+         "if(filled){\n"
+         "    g.fillOval(x, y, width, height);\n"
+         "} else {\n"
+         "    g.drawOval(x, y, width, height);\n"
+         "}\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void drawText(BufferedImage img, String text, int x, int y, Font font, Color color){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setFont(font);\n"
+         "g.setColor(color);\n"
+         "g.drawString(text, x, y);\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void drawPolygon(BufferedImage img, int[] xPoints, int[] yPoints, int nPoints, Color color, boolean filled){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setColor(color);\n"
+         "if(filled){\n"
+         "    g.fillPolygon(xPoints, yPoints, nPoints);\n"
+         "} else {\n"
+         "    g.drawPolygon(xPoints, yPoints, nPoints);\n"
+         "}\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void drawImage(BufferedImage img, BufferedImage imgToDraw, int x, int y){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.drawImage(imgToDraw, x, y, null);\n"
+         "g.dispose();\n"
+         "}\n")
+
+    (asm "public static void saveImage(BufferedImage img, String format, String filePath) throws IOException {\n"
+         "ImageIO.write(img, format, new File(filePath));\n"
+         "}\n")
+
+    (asm "public static BufferedImage loadImage(String filePath) throws IOException {\n"
+         "return ImageIO.read(new File(filePath));\n"
+         "}\n")
+
+    (asm "public static Color hexToColor(String hex){\n"
+         "return Color.decode(hex);\n"
+         "}\n")
+
+    (asm "public static void clearImage(BufferedImage img, Color color){\n"
+         "Graphics2D g = img.createGraphics();\n"
+         "g.setColor(color);\n"
+         "g.fillRect(0, 0, img.getWidth(), img.getHeight());\n"
+         "g.dispose();\n"
+         "}\n")
+)

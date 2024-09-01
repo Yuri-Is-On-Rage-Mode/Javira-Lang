@@ -1,0 +1,22 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static int randomInt(int min, int max){return (int)(Math.random() * (max - min + 1) + min);}\n")
+    (asm "public static double randomDouble(double min, double max){return (Math.random() * (max - min) + min);}\n")
+    (asm "public static boolean randomBoolean(){return Math.random() < 0.5;}\n")
+    (asm "public static int parseInt(String s){return Integer.parseInt(s);}\n")
+    (asm "public static float parseFloat(String s){return Float.parseFloat(s);}\n")
+    (asm "public static double parseDouble(String s){return Double.parseDouble(s);}\n")
+    (asm "public static boolean parseBoolean(String s){return Boolean.parseBoolean(s);}\n")
+    (asm "public static long parseLong(String s){return Long.parseLong(s);}\n")
+    (asm "public static int abs(int x){return Math.abs(x);}\n")
+    (asm "public static long abs(long x){return Math.abs(x);}\n")
+    (asm "public static double abs(double x){return Math.abs(x);}\n")
+    (asm "public static int max(int x, int y){return Math.max(x, y);}\n")
+    (asm "public static long max(long x, long y){return Math.max(x, y);}\n")
+    (asm "public static double max(double x, double y){return Math.max(x, y);}\n")
+    (asm "public static int min(int x, int y){return Math.min(x, y);}\n")
+    (asm "public static long min(long x, long y){return Math.min(x, y);}\n")
+    (asm "public static double min(double x, double y){return Math.min(x, y);}\n")
+)
+

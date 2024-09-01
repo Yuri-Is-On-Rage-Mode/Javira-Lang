@@ -1,0 +1,104 @@
+(@pragma once)
+
+(@if TARGET_JAVA 1
+    (asm "public static <T> int listSize(List<T> list){return list.size();}\n")
+    (asm "public static <T> boolean listIsEmpty(List<T> list){return list.isEmpty();}\n")
+    (asm "public static <T> boolean listContains(List<T> list, T element){return list.contains(element);}\n")
+    (asm "public static <T> T listGet(List<T> list, int index){return list.get(index);}\n")
+    (asm "public static <T> void listAdd(List<T> list, T element){list.add(element);}\n")
+    (asm "public static <T> void listRemove(List<T> list, T element){list.remove(element);}\n")
+    (asm "public static <T> void listClear(List<T> list){list.clear();}\n")
+    (asm "public static <T> T listSet(List<T> list, int index, T element){return list.set(index, element);}\n")
+    (asm "public static <T> int listIndexOf(List<T> list, T element){return list.indexOf(element);}\n")
+    (asm "public static <T> boolean setAdd(Set<T> set, T element){return set.add(element);}\n")
+    (asm "public static <T> boolean setRemove(Set<T> set, T element){return set.remove(element);}\n")
+    (asm "public static <T> boolean setContains(Set<T> set, T element){return set.contains(element);}\n")
+    (asm "public static <T> int setSize(Set<T> set){return set.size();}\n")
+    (asm "public static <K, V> int mapSize(Map<K, V> map){return map.size();}\n")
+    (asm "public static <K, V> boolean mapIsEmpty(Map<K, V> map){return map.isEmpty();}\n")
+    (asm "public static <K, V> boolean mapContainsKey(Map<K, V> map, K key){return map.containsKey(key);}\n")
+    (asm "public static <K, V> boolean mapContainsValue(Map<K, V> map, V value){return map.containsValue(value);}\n")
+    (asm "public static <K, V> V mapGet(Map<K, V> map, K key){return map.get(key);}\n")
+    (asm "public static <K, V> V mapPut(Map<K, V> map, K key, V value){return map.put(key, value);}\n")
+    (asm "public static <K, V> V mapRemove(Map<K, V> map, K key){return map.remove(key);}\n")
+    (asm "public static <T> T[] listToArray(List<T> list){return (T[]) list.toArray();}\n")
+    (asm "public static <T> List<T> arrayToList(T[] array){return Arrays.asList(array);}\n")
+    (asm "public static <T> Set<T> listToSet(List<T> list){return new HashSet<>(list);}\n")
+    (asm "public static <T> List<T> setToList(Set<T> set){return new ArrayList<>(set);}\n")
+    (asm "public static <K, V> Map<K, V> listToMap(List<K> keys, List<V> values){\n"
+         "Map<K, V> map = new HashMap<>();\n"
+         "for (int i = 0; i < keys.size(); i++) {\n"
+         "    map.put(keys.get(i), values.get(i));\n"
+         "}\n"
+         "return map;\n"
+         "}\n")
+    (asm "public static <K, V> List<K> mapKeys(Map<K, V> map){return new ArrayList<>(map.keySet());}\n")
+    (asm "public static <K, V> List<V> mapValues(Map<K, V> map){return new ArrayList<>(map.values());}\n")
+    (asm "public static <T> void listForEach(List<T> list, Consumer<T> action){list.forEach(action);}\n")
+    (asm "public static <T> List<T> listFilter(List<T> list, Predicate<T> predicate){\n"
+         "return list.stream().filter(predicate).collect(Collectors.toList());\n"
+         "}\n")
+    (asm "public static <T, R> List<R> listMap(List<T> list, Function<T, R> mapper){\n"
+         "return list.stream().map(mapper).collect(Collectors.toList());}\n")
+    (asm "public static <T> Optional<T> listFindFirst(List<T> list, Predicate<T> predicate){\n"
+         "return list.stream().filter(predicate).findFirst();\n"
+         "}\n")
+    (asm "public static <T> List<T> listSubList(List<T> list, int fromIndex, int toIndex){return list.subList(fromIndex, toIndex);}\n")
+    (asm "public static <T> boolean listReplaceAll(List<T> list, T oldVal, T newVal){\n"
+         "return Collections.replaceAll(list, oldVal, newVal);}\n")
+    (asm "public static <T> void listSort(List<T> list, Comparator<? super T> c){Collections.sort(list, c);}\n")
+    (asm "public static <T> void listReverse(List<T> list){Collections.reverse(list);}\n")
+    (asm "public static <T> List<T> listOf(T... elements){return Arrays.asList(elements);}\n")
+    (asm "public static <T> Set<T> setOf(T... elements){return new HashSet<>(Arrays.asList(elements));}\n")
+    (asm "public static <K, V> Map<K, V> mapOf(K key, V value){Map<K, V> map = new HashMap<>(); map.put(key, value); return map;}\n")
+    (asm "public static <K, V> Map<K, V> mapOfEntries(Map.Entry<K, V>... entries){\n"
+         "return Arrays.stream(entries).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));\n"
+         "}\n")
+    (asm "public static <T> T listReduce(List<T> list, BinaryOperator<T> accumulator){return list.stream().reduce(accumulator).orElse(null);}\n")
+    (asm "public static <T> T listFindAny(List<T> list, Predicate<T> predicate){return list.stream().filter(predicate).findAny().orElse(null);}\n")
+    (asm "public static <T> long listCount(List<T> list, Predicate<T> predicate){return list.stream().filter(predicate).count();}\n")
+    (asm "public static <T> List<T> listDistinct(List<T> list){return list.stream().distinct().collect(Collectors.toList());}\n")
+    (asm "public static <T> void listShuffle(List<T> list){Collections.shuffle(list);}\n")
+    (asm "public static <T> T listGetFirst(List<T> list){return list.isEmpty() ? null : list.get(0);}\n")
+    (asm "public static <T> T listGetLast(List<T> list){return list.isEmpty() ? null : list.get(list.size() - 1);}\n")
+    (asm "public static <T> List<T> listSortAscending(List<T> list){return list.stream().sorted().collect(Collectors.toList());}\n")
+    (asm "public static <T> List<T> listSortDescending(List<T> list){return list.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());}\n")
+    (asm "public static <T> Set<T> setUnion(Set<T> set1, Set<T> set2){\n"
+         "Set<T> result = new HashSet<>(set1);\n"
+         "result.addAll(set2);\n"
+         "return result;\n"
+         "}\n")
+    (asm "public static <T> Set<T> setIntersection(Set<T> set1, Set<T> set2){\n"
+         "Set<T> result = new HashSet<>(set1);\n"
+         "result.retainAll(set2);\n"
+         "return result;\n"
+         "}\n")
+    (asm "public static <T> Set<T> setDifference(Set<T> set1, Set<T> set2){\n"
+         "Set<T> result = new HashSet<>(set1);\n"
+         "result.removeAll(set2);\n"
+         "return result;\n"
+         "}\n")
+    (asm "public static <T> List<T> listRemoveDuplicates(List<T> list){\n"
+         "return list.stream().distinct().collect(Collectors.toList());\n"
+         "}\n")
+    (asm "public static <T> void listReplaceAll(List<T> list, UnaryOperator<T> operator){list.replaceAll(operator);}\n")
+    (asm "public static <T> List<T> listMerge(List<T> list1, List<T> list2){\n"
+         "List<T> merged = new ArrayList<>(list1);\n"
+         "merged.addAll(list2);\n"
+         "return merged;\n"
+         "}\n")
+    (asm "public static <T> List<T> listIntersection(List<T> list1, List<T> list2){\n"
+         "return list1.stream().filter(list2::contains).collect(Collectors.toList());\n"
+         "}\n")
+    (asm "public static <T> List<T> listDifference(List<T> list1, List<T> list2){\n"
+         "return list1.stream().filter(e -> !list2.contains(e)).collect(Collectors.toList());\n"
+         "}\n")
+    (asm "public static <T> List<T> listReverseCopy(List<T> list){\n"
+         "List<T> reversed = new ArrayList<>(list);\n"
+         "Collections.reverse(reversed);\n"
+         "return reversed;\n"
+         "}\n")
+    (asm "public static <T> List<T> listImmutable(List<T> list){return Collections.unmodifiableList(list);}\n")
+    (asm "public static <T> Set<T> setImmutable(Set<T> set){return Collections.unmodifiableSet(set);}\n")
+    (asm "public static <K, V> Map<K, V> mapImmutable(Map<K, V> map){return Collections.unmodifiableMap(map);}\n")
+)
